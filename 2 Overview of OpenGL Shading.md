@@ -16,4 +16,42 @@ Vertex processor一次操作一个顶点。他不替换需要一次知道多个�
 光栅控制处理器，Tessellation Control processor是一个操作一组输入顶点和关联数据并说出一组新的顶点的可编程单元。对应的
 GLSL叫做tessellation control shaders.当一组该shader成功编译并链接，会生成一个运行在本处理器上的tessellation control shader可执行文件。
 
-Tessellation control shader对于每一组输出都会被调用。每次调用可以读输入或者输出的任何顶点的属性。
+Tessellation control shader对于每一组输出的顶点都会被调用。每次调用可以读输入或者输出的任何顶点的属性。但是只能写对应批量输出顶点的每个顶点的属性。
+shader调用共同对输出区块产生一个区块属性集合。最后光栅控制shader调用结束，结果的顶点序列和每个区块的属性会装配来形成一个区块给子片段管线舞台使用。
+
+光栅控制shader调用大多独立运行，有着未定义的关联执行顺序。但是，内建函数barriere()可以通过同步调用来控制调用顺序， 高效地划分光栅控制shader执行过程
+为多个阶段。光栅控制shader会获取未定义的结果如果一次调用读取了一个在同一阶段内由其他调用所写入的单顶点、单区块属性，或者两次调用尝试在单一阶段写到同一个
+区块输出。
+
+# 2.3 Tessellation Evaluation Processor
+
+Tessellation evaluation process是一个可编程单元可以评估一个来自光栅元生成器产生的顶点的position和其他属性。使用一个区块来承载输入顶点和顶点的关联数据。
+用GLSL编写的编译单元来在这个处理器上运行叫做tessellation evaluation shader.当一个集合这样的shader成功被编译和链接之后，会产生对应的可执行程序运行在
+光栅评估处理器上。
+
+每次调用会计算每个光栅图元生成器顶点的position和其他属性。可执行程序可以读取输入区块的任何属性，外加光栅坐标（即正在光栅化的图元的相对位置）。对应的
+可执行程序写position还有顶点的其他属性。
+
+# 2.4 Geometry Processor
+
+Geometry Processor 是一个可编程单元对于一个拼装的图元操作输入顶点的数据并且从输出的图元输出一段顶点。 GLSL里的这个处理器的对应编译单元叫做gometry shaders.
+当一组该shader成功编译并连接，会生成对应的运行在geometry处理器上的可执行文件。
+
+一次调用会操作一个用固定数量的顶点声明的输入图元。调用会发出不定量的顶点并装配进一个声明的输出图元类型的图元并且传到子管线舞台。
+
+# 2.5 Fragment Processor
+
+fragment processor 是一个可编程图元操作片段的值以及他们对应关联的数据。对应的shader叫做fragment shader.编译好了是fragment shader 可执行。（太特么墨迹了）
+
+一个fragment shader不能改变一个片段(x,y)的位置。访问相邻的片段是不被允许的。由该shader计算的值用来根据当前OpenGL状态以及引发片段被生成的OGL指令更新帧缓冲区
+内存或者文理内存。
+
+# 2.6 Compute Processor
+
+computer processor 是可编程管线操作其他shader处理器的。 对应的shader叫做compute shader.可执行叫做compute shader 可执行。
+
+compute shader可以访问许多同样资源如fragment何其他shader处理器（包含文理、缓冲区、图像变量、原子计数器）。并没有预定义的输入或者任何固定函数的输出。
+不是图形管线的一部分并且他的可见的副作用通过对图像、存储的缓冲区和原子计数器来展现。
+
+computer shader操作一组工作物叫做工作组。 一个工作组是shader调用和相同代码的执行的集合，尤其是并行计算。一个工作组内的一次调用可以和同一工作组的其他
+工人通过共享变量、发布内存、控制栅来同步地共享数据。
