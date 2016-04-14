@@ -13,34 +13,34 @@
 
 本文档基于对老版本OpenGL语言说明的贡献者的成果、OpenGL ES 2.0语言说明文档以及下面对于本版本的贡献者：
 
-Pat Brown, NVIDIA
-Jeff Bolz, NVIDIA
-Frank Chen
-Pierre Boudier, AMD
-Piers Daniell, NVIDIA
-Chris Dodd, NVIDIA
-Nick Haemel, NVIDIA
-Jason Green, TransGaming
-Brent Insko, Intel
-Jon Leech
-Bill Licea-Kane, AMD
-Daniel Koch, TransGaming
-Graeme Leese, Broadcom
-Barthold Lichtenbelt, NVIDIA
-Bruce Merry, ARM
-Robert Ohannessian
-Tom Olson, ARM
-Acorn Pooley, NVIDIA
-Christophe Riccio, AMD
-Kevin Rogovin
-Ian Romanick, Intel
-Greg Roth, Nvidia
-Graham Sellers, AMD
-Dave Shreiner, ARM
-Jeremy Sandmel, Apple
-Robert Simpson, Qualcomm
-Eric Werness, NVIDIA
-Mark Young, AMD
+- Pat Brown, NVIDIA
+- Jeff Bolz, NVIDIA
+- Frank Chen
+- Pierre Boudier, AMD
+- Piers Daniell, NVIDIA
+- Chris Dodd, NVIDIA
+- Nick Haemel, NVIDIA
+- Jason Green, TransGaming
+- Brent Insko, Intel
+- Jon Leech
+- Bill Licea-Kane, AMD
+- Daniel Koch, TransGaming
+- Graeme Leese, Broadcom
+- Barthold Lichtenbelt, NVIDIA
+- Bruce Merry, ARM
+- Robert Ohannessian
+- Tom Olson, ARM
+- Acorn Pooley, NVIDIA
+- Christophe Riccio, AMD
+- Kevin Rogovin
+- Ian Romanick, Intel
+- Greg Roth, Nvidia
+- Graham Sellers, AMD
+- Dave Shreiner, ARM
+- Jeremy Sandmel, Apple
+- Robert Simpson, Qualcomm
+- Eric Werness, NVIDIA
+- Mark Young, AMD
 
 # 1.2 变化
 
